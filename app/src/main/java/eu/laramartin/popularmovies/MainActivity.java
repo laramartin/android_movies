@@ -27,18 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-
             URL moviesRequestUrl = NetworkUtils.buildUrl(BuildConfig.API_KEY);
-
             try {
                 String jsonMoviesResponse = NetworkUtils
                         .getResponseFromHttpUrl(moviesRequestUrl);
-
                 Response response = MoviesJsonUtils.parseJson(jsonMoviesResponse);
                 String responseString = response.toString();
-
                 return responseString;
-
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -49,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String moviesData) {
             if (moviesData != null) {
                 Log.v(LOG_TAG, "moviesData: " + moviesData);
-
             }
         }
     }

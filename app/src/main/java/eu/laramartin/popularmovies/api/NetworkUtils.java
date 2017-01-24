@@ -19,7 +19,6 @@ public class NetworkUtils {
     // http://api.themoviedb.org/3/movie/popular?api_key=[YOUR_API_KEY]
     private static final String LOG_TAG = NetworkUtils.class.getCanonicalName();
 
-
     public static URL buildUrl(String apiKey) {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("http")
@@ -28,14 +27,12 @@ public class NetworkUtils {
                 .appendPath("movie")
                 .appendPath("popular")
                 .appendQueryParameter("api_key", apiKey);
-
         URL url = null;
         try {
             url = new URL(builder.build().toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
         Log.v(LOG_TAG, "Built URI " + url);
         return url;
     }
@@ -44,10 +41,8 @@ public class NetworkUtils {
         HttpURLConnection urlConnection = (HttpURLConnection) moviesRequestUrl.openConnection();
         try {
             InputStream in = urlConnection.getInputStream();
-
             Scanner scanner = new Scanner(in);
             scanner.useDelimiter("\\A");
-
             boolean hasInput = scanner.hasNext();
             if (hasInput) {
                 return scanner.next();
