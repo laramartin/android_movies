@@ -7,7 +7,9 @@ import android.util.Log;
 
 import java.net.URL;
 
+import eu.laramartin.popularmovies.api.MoviesJsonUtils;
 import eu.laramartin.popularmovies.api.NetworkUtils;
+import eu.laramartin.popularmovies.db.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
                 String jsonMoviesResponse = NetworkUtils
                         .getResponseFromHttpUrl(moviesRequestUrl);
 
-//                String[] simpleJsonWeatherData = MoviesJsonUtils
-//                        .getSimpleWeatherStringsFromJson(MainActivity.this, jsonWeatherResponse);
+                Response response = MoviesJsonUtils.parseJson(jsonMoviesResponse);
+                String responseString = response.toString();
 
-                return jsonMoviesResponse;
+                return responseString;
 
             } catch (Exception e) {
                 e.printStackTrace();

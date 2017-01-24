@@ -10,7 +10,7 @@ public class Movie {
     private String releaseDate;
     private String title;
     private int id;
-    private float voteAverage;
+    private long voteAverage;
 
     public String getPosterPath() {
         return posterPath;
@@ -52,11 +52,11 @@ public class Movie {
         this.id = id;
     }
 
-    public float getVoteAverage() {
+    public long getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(float voteAverage) {
+    public void setVoteAverage(long voteAverage) {
         this.voteAverage = voteAverage;
     }
 }

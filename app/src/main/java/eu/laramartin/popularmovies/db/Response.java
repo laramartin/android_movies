@@ -17,4 +17,11 @@ public class Response {
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "movies=" + movies +
+                '}';
+    }
 }
