@@ -23,7 +23,7 @@ public class NetworkUtils {
                 .appendPath("3")
                 .appendPath("movie")
                 .appendPath("popular")
-                .appendQueryParameter("api_key", "1");
+                .appendQueryParameter("api_key", apiKey);
 
         URL url = null;
         try {
