@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import java.net.URL;
+import java.util.List;
 
 import eu.laramartin.popularmovies.api.MoviesJsonUtils;
 import eu.laramartin.popularmovies.api.NetworkUtils;
+import eu.laramartin.popularmovies.data.Movie;
 import eu.laramartin.popularmovies.data.MoviesResponse;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,16 +35,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public class FetchMoviesTask extends AsyncTask<String, Void, MoviesResponse> {
+    public class FetchMoviesTask extends AsyncTask<String, Void, List<Movie>> {
 
         @Override
-        protected MoviesResponse doInBackground(String... params) {
+        protected List<Movie> doInBackground(String... params) {
             URL moviesRequestUrl = NetworkUtils.buildUrl(BuildConfig.API_KEY);
             try {
                 String jsonMoviesResponse = NetworkUtils
                         .getResponseFromHttpUrl(moviesRequestUrl);
                 MoviesResponse moviesResponse = MoviesJsonUtils.parseJson(jsonMoviesResponse);
-                return moviesResponse;
+                return moviesResponse.getMovies();
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -50,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(MoviesResponse moviesResponse) {
-            if (moviesResponse != null) {
-                Log.v(LOG_TAG, "moviesData: " + moviesResponse);
-                adapter.setMoviesData(moviesResponse);
+        protected void onPostExecute(List<Movie> movies) {
+            if (movies != null) {
+                Log.v(LOG_TAG, "moviesData: " + movies);
+                adapter.setMoviesData(movies);
             }
         }
     }

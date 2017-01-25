@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import eu.laramartin.popularmovies.data.MoviesResponse;
+import java.util.ArrayList;
+import java.util.List;
+
+import eu.laramartin.popularmovies.data.Movie;
 
 /**
  * Created by lara on 25/1/17.
@@ -14,13 +17,13 @@ import eu.laramartin.popularmovies.data.MoviesResponse;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdapterViewHolder> {
 
-    private MoviesResponse moviesResponseData;
+    private List<Movie> movies = new ArrayList<>();
 
     public MoviesAdapter() {
     }
 
-    public void setMoviesData(MoviesResponse moviesResponse) {
-        moviesResponseData = moviesResponse;
+    public void setMoviesData(List<Movie> list) {
+        movies = list;
         notifyDataSetChanged();
     }
 
@@ -44,11 +47,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
 
     @Override
     public void onBindViewHolder(MoviesAdapterViewHolder holder, int position) {
-        holder.titleText.setText("SAMPLE");
+        holder.titleText.setText(movies.get(position).getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return 30;
+        return movies.size();
     }
 }
