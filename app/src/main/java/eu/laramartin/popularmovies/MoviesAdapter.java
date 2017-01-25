@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import eu.laramartin.popularmovies.db.Response;
+import eu.laramartin.popularmovies.data.MoviesResponse;
 
 /**
  * Created by lara on 25/1/17.
@@ -14,13 +14,13 @@ import eu.laramartin.popularmovies.db.Response;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdapterViewHolder> {
 
-    private Response responseData;
+    private MoviesResponse moviesResponseData;
 
     public MoviesAdapter() {
     }
 
-    public void setMoviesData(Response response) {
-        responseData = response;
+    public void setMoviesData(MoviesResponse moviesResponse) {
+        moviesResponseData = moviesResponse;
         notifyDataSetChanged();
     }
 

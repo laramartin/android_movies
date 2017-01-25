@@ -10,8 +10,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.laramartin.popularmovies.db.Movie;
-import eu.laramartin.popularmovies.db.Response;
+import eu.laramartin.popularmovies.data.Movie;
+import eu.laramartin.popularmovies.data.MoviesResponse;
 
 /**
  * Created by lara on 24/1/17.
@@ -28,7 +28,7 @@ public class MoviesJsonUtils {
     private static final String idKey = "id";
     private static final String voteAverageKey = "vote_average";
 
-    public static Response parseJson(String json)
+    public static MoviesResponse parseJson(String json)
             throws JSONException {
         JSONObject responseJson = new JSONObject(json);
         if (responseJson.has(statusError)) {
@@ -37,9 +37,9 @@ public class MoviesJsonUtils {
         }
         JSONArray moviesArray = responseJson.getJSONArray(movies);
         List<Movie> movieList = parseMovieList(moviesArray);
-        Response response = new Response();
-        response.setMovies(movieList);
-        return response;
+        MoviesResponse moviesResponse = new MoviesResponse();
+        moviesResponse.setMovies(movieList);
+        return moviesResponse;
     }
 
     @NonNull

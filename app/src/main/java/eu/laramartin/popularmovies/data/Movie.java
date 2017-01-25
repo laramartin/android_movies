@@ -1,4 +1,4 @@
-package eu.laramartin.popularmovies.db;
+package eu.laramartin.popularmovies.data;
 
 /**
  * Created by lara on 24/1/17.

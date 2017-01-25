@@ -11,7 +11,7 @@ import java.net.URL;
 
 import eu.laramartin.popularmovies.api.MoviesJsonUtils;
 import eu.laramartin.popularmovies.api.NetworkUtils;
-import eu.laramartin.popularmovies.db.Response;
+import eu.laramartin.popularmovies.data.MoviesResponse;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,16 +33,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public class FetchMoviesTask extends AsyncTask<String, Void, Response> {
+    public class FetchMoviesTask extends AsyncTask<String, Void, MoviesResponse> {
 
         @Override
-        protected Response doInBackground(String... params) {
+        protected MoviesResponse doInBackground(String... params) {
             URL moviesRequestUrl = NetworkUtils.buildUrl(BuildConfig.API_KEY);
             try {
                 String jsonMoviesResponse = NetworkUtils
                         .getResponseFromHttpUrl(moviesRequestUrl);
-                Response response = MoviesJsonUtils.parseJson(jsonMoviesResponse);
-                return response;
+                MoviesResponse moviesResponse = MoviesJsonUtils.parseJson(jsonMoviesResponse);
+                return moviesResponse;
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Response response) {
-            if (response != null) {
-                Log.v(LOG_TAG, "moviesData: " + response);
-                adapter.setMoviesData(response);
+        protected void onPostExecute(MoviesResponse moviesResponse) {
+            if (moviesResponse != null) {
+                Log.v(LOG_TAG, "moviesData: " + moviesResponse);
+                adapter.setMoviesData(moviesResponse);
             }
         }
     }

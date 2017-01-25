@@ -1,4 +1,4 @@
-package eu.laramartin.popularmovies.db;
+package eu.laramartin.popularmovies.data;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import java.util.List;
  * Created by lara on 24/1/17.
  */
 
-public class Response {
+public class MoviesResponse {
 
     List<Movie> movies;
 
@@ -20,7 +20,7 @@ public class Response {
 
     @Override
     public String toString() {
-        return "Response{" +
+        return "MoviesResponse{" +
                 "movies=" + movies +
                 '}';
     }
