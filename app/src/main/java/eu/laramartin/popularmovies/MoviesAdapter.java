@@ -4,7 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +31,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
 
     public class MoviesAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        final TextView titleText;
+        final ImageView imagePoster;
 
         public MoviesAdapterViewHolder(View itemView) {
             super(itemView);
-            titleText = (TextView) itemView.findViewById(R.id.text_title);
+            imagePoster = (ImageView) itemView.findViewById(R.id.image_poster);
         }
     }
 
@@ -47,7 +49,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
 
     @Override
     public void onBindViewHolder(MoviesAdapterViewHolder holder, int position) {
-        holder.titleText.setText(movies.get(position).getTitle());
+        Picasso.with(holder.imagePoster.getContext()).load("http://i.imgur.com/DvpvklR.png").into(holder.imagePoster);
+//        holder.titleText.setText(movies.get(position).getTitle());
     }
 
     @Override
