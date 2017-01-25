@@ -3,7 +3,7 @@ package eu.laramartin.popularmovies;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         FetchMoviesTask moviesTask = new FetchMoviesTask();
         moviesTask.execute();
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         adapter = new MoviesAdapter();
