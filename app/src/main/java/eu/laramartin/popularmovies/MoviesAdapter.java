@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.laramartin.popularmovies.api.NetworkUtils;
 import eu.laramartin.popularmovies.data.Movie;
 
 /**
@@ -49,8 +50,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
 
     @Override
     public void onBindViewHolder(MoviesAdapterViewHolder holder, int position) {
-        Picasso.with(holder.imagePoster.getContext()).load("http://i.imgur.com/DvpvklR.png").into(holder.imagePoster);
-//        holder.titleText.setText(movies.get(position).getTitle());
+        Picasso.with(holder.imagePoster.getContext())
+                .load(NetworkUtils.buildPosterUrl(movies.get(position).getPosterPath()))
+                .into(holder.imagePoster);
     }
 
     @Override
