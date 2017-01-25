@@ -55,6 +55,6 @@ public class NetworkUtils {
     }
 
     public static String buildPosterUrl(String posterPath) {
-        return "http://image.tmdb.org/t/p/w185/" + posterPath;
+        return "http://image.tmdb.org/t/p/w500/" + posterPath;
     }
 }
