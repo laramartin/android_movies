@@ -33,17 +33,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public class FetchMoviesTask extends AsyncTask<String, Void, String> {
+    public class FetchMoviesTask extends AsyncTask<String, Void, Response> {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Response doInBackground(String... params) {
             URL moviesRequestUrl = NetworkUtils.buildUrl(BuildConfig.API_KEY);
             try {
                 String jsonMoviesResponse = NetworkUtils
                         .getResponseFromHttpUrl(moviesRequestUrl);
                 Response response = MoviesJsonUtils.parseJson(jsonMoviesResponse);
-                String responseString = response.toString();
-                return responseString;
+                return response;
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -51,9 +50,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String moviesData) {
-            if (moviesData != null) {
-                Log.v(LOG_TAG, "moviesData: " + moviesData);
+        protected void onPostExecute(Response response) {
+            if (response != null) {
+                Log.v(LOG_TAG, "moviesData: " + response);
+                adapter.setMoviesData(response);
             }
         }
     }
