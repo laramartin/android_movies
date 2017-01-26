@@ -3,7 +3,7 @@ package eu.laramartin.popularmovies;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import eu.laramartin.popularmovies.R;
+import eu.laramartin.popularmovies.data.Movie;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -11,5 +11,8 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        Bundle data = getIntent().getExtras();
+        Movie movie = data.getParcelable("movieDetails");
     }
 }
