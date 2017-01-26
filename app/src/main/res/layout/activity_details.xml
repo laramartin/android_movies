@@ -10,7 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:weightSum="3"
-    android:background="@color/colorGrey"
     tools:context="eu.laramartin.popularmovies.DetailsActivity">
 
     <ImageView

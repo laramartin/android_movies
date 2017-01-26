@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:background="@color/colorGrey"
     tools:context="eu.laramartin.popularmovies.MainActivity">
 
     <android.support.v7.widget.RecyclerView
