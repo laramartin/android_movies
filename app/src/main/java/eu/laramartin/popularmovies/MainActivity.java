@@ -10,6 +10,8 @@ import android.util.Log;
 import java.net.URL;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import eu.laramartin.popularmovies.api.MoviesJsonUtils;
 import eu.laramartin.popularmovies.api.NetworkUtils;
 import eu.laramartin.popularmovies.data.Movie;
@@ -18,16 +20,18 @@ import eu.laramartin.popularmovies.data.MoviesResponse;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getCanonicalName();
-    private RecyclerView recyclerView;
     private MoviesAdapter adapter;
+
+    @BindView(R.id.recycler)
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         FetchMoviesTask moviesTask = new FetchMoviesTask();
         moviesTask.execute();
-        recyclerView = (RecyclerView) findViewById(R.id.recycler);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
