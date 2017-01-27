@@ -5,11 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.laramartin.popularmovies.api.NetworkUtils;
 import eu.laramartin.popularmovies.data.Movie;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -40,9 +37,10 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void setMovieDetails(Movie movie) {
-        Picasso.with(imagePoster.getContext())
-                .load(NetworkUtils.buildPosterUrl(movie.getPosterPath()))
-                .into(imagePoster);
+//        Picasso.with(imagePoster.getContext())
+//                .load(NetworkUtils.buildPosterUrl(movie.getPosterPath()))
+//                .into(imagePoster);
+        imagePoster.setImageResource(R.drawable.ic_android_black_24dp);
         textDetailsTitle.setText(movie.getTitle());
         textDetailsReleaseDate.setText(movie.getReleaseDate());
         textDetailsVoteAverage.setText(String.valueOf(movie.getVoteAverage()));
