@@ -19,13 +19,14 @@ public class NetworkUtils {
     // http://api.themoviedb.org/3/movie/popular?api_key=[YOUR_API_KEY]
     private static final String LOG_TAG = NetworkUtils.class.getCanonicalName();
 
-    public static URL buildUrl(String apiKey) {
+    public static URL buildUrl(String apiKey, String filterType) {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("http")
                 .authority("api.themoviedb.org")
                 .appendPath("3")
                 .appendPath("movie")
-                .appendPath("popular")
+//                .appendPath("popular")
+                .appendPath(filterType)
                 .appendQueryParameter("api_key", apiKey);
         URL url = null;
         try {

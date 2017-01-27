@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getCanonicalName();
     private MoviesAdapter adapter;
+    private static final String FILTER_TYPE_1 = "popular";
+    private static final String FILTER_TYPE_2 = "best";
+    private static String filterType;
 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        filterType = FILTER_TYPE_1;
         FetchMoviesTask moviesTask = new FetchMoviesTask();
 //        moviesTask.execute();
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected List<Movie> doInBackground(String... params) {
-            URL moviesRequestUrl = NetworkUtils.buildUrl(BuildConfig.API_KEY);
+            URL moviesRequestUrl = NetworkUtils.buildUrl(BuildConfig.API_KEY, filterType);
             try {
                 String jsonMoviesResponse = NetworkUtils
                         .getResponseFromHttpUrl(moviesRequestUrl);
@@ -80,9 +84,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_popular) {
             Toast.makeText(this, "popular", Toast.LENGTH_SHORT).show();
+            filterType = FILTER_TYPE_1;
+            FetchMoviesTask moviesTask = new FetchMoviesTask();
+            moviesTask.execute();
         }
         if (item.getItemId() == R.id.action_best) {
             Toast.makeText(this, "best", Toast.LENGTH_SHORT).show();
+            filterType = FILTER_TYPE_2;
+            FetchMoviesTask moviesTask = new FetchMoviesTask();
+            moviesTask.execute();
         }
         return super.onOptionsItemSelected(item);
     }
