@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -72,14 +73,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_popular) {
-            // TODO display two options in menu to choose filter type
+            Toast.makeText(this, "popular", Toast.LENGTH_SHORT).show();
         }
-        return true;
+        if (item.getItemId() == R.id.action_best) {
+            Toast.makeText(this, "best", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
