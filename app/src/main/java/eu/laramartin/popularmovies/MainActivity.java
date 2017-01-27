@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private MoviesAdapter adapter;
     private static final String FILTER_TYPE_1 = "popular";
     private static final String FILTER_TYPE_2 = "best";
-    private static String filterType;
 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
@@ -38,9 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        filterType = FILTER_TYPE_1;
         FetchMoviesTask moviesTask = new FetchMoviesTask();
-//        moviesTask.execute();
+        moviesTask.execute(FILTER_TYPE_1);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected List<Movie> doInBackground(String... params) {
-            URL moviesRequestUrl = NetworkUtils.buildUrl(BuildConfig.API_KEY, filterType);
+            URL moviesRequestUrl = NetworkUtils.buildUrl(BuildConfig.API_KEY, params[0]);
             try {
                 String jsonMoviesResponse = NetworkUtils
                         .getResponseFromHttpUrl(moviesRequestUrl);
@@ -83,16 +81,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_popular) {
-            Toast.makeText(this, "popular", Toast.LENGTH_SHORT).show();
-            filterType = FILTER_TYPE_1;
             FetchMoviesTask moviesTask = new FetchMoviesTask();
-            moviesTask.execute();
+            moviesTask.execute(FILTER_TYPE_1);
         }
         if (item.getItemId() == R.id.action_best) {
-            Toast.makeText(this, "best", Toast.LENGTH_SHORT).show();
-            filterType = FILTER_TYPE_2;
             FetchMoviesTask moviesTask = new FetchMoviesTask();
-            moviesTask.execute();
+            moviesTask.execute(FILTER_TYPE_2);
         }
         return super.onOptionsItemSelected(item);
     }
