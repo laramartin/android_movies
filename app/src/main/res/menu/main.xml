@@ -8,8 +8,8 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_best"
+        android:id="@+id/action_top_rated"
         android:orderInCategory="2"
-        android:title="@string/filter_best"
+        android:title="@string/filter_top_rated"
         app:showAsAction="never" />
 </menu>

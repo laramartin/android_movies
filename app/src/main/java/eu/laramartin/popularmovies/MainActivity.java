@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getCanonicalName();
     private MoviesAdapter adapter;
     private static final String FILTER_TYPE_1 = "popular";
-    private static final String FILTER_TYPE_2 = "best";
+    private static final String FILTER_TYPE_2 = "top_rated";
 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             FetchMoviesTask moviesTask = new FetchMoviesTask();
             moviesTask.execute(FILTER_TYPE_1);
         }
-        if (item.getItemId() == R.id.action_best) {
+        if (item.getItemId() == R.id.action_top_rated) {
             FetchMoviesTask moviesTask = new FetchMoviesTask();
             moviesTask.execute(FILTER_TYPE_2);
         }
