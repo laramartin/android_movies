@@ -8,17 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.popularmovies.api.MoviesJsonUtils;
 import eu.laramartin.popularmovies.api.NetworkUtils;
-import eu.laramartin.popularmovies.data.MockData;
 import eu.laramartin.popularmovies.data.Movie;
 import eu.laramartin.popularmovies.data.MoviesResponse;
 
@@ -44,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         adapter = new MoviesAdapter();
         recyclerView.setAdapter(adapter);
-        adapter.setMoviesData(Arrays.asList(MockData.getSampleMovie()));
     }
 
     public class FetchMoviesTask extends AsyncTask<String, Void, List<Movie>> {

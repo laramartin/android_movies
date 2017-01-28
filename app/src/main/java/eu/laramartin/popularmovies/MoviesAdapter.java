@@ -7,11 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.laramartin.popularmovies.api.NetworkUtils;
 import eu.laramartin.popularmovies.data.Movie;
 
 /**
@@ -59,10 +62,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
 
     @Override
     public void onBindViewHolder(MoviesAdapterViewHolder holder, int position) {
-//        Picasso.with(holder.imagePoster.getContext())
-//                .load(NetworkUtils.buildPosterUrl(movies.get(position).getPosterPath()))
-//                .into(holder.imagePoster);
-        holder.imagePoster.setImageResource(R.drawable.ic_android_black_24dp);
+        Picasso.with(holder.imagePoster.getContext())
+                .load(NetworkUtils.buildPosterUrl(movies.get(position).getPosterPath()))
+                .into(holder.imagePoster);
     }
 
     @Override
