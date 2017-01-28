@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:scrollbars="none"
     tools:context="eu.laramartin.popularmovies.DetailsActivity">
 
     <LinearLayout
@@ -36,9 +37,10 @@
             android:layout_marginTop="8dp"
             android:background="@color/colorPrimaryDark" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="16dp">
             <TextView
                 android:layout_width="wrap_content"
@@ -53,19 +55,29 @@
                 android:numStars="10"
                 android:stepSize="0.1"
                 style="?android:attr/ratingBarStyleSmall"
-                android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@+id/text_vote_average"
-                android:layout_toEndOf="@+id/text_vote_average"
                 android:layout_marginLeft="8dp"/>
-        </RelativeLayout>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/text_details_release_date"
-            style="@style/TextAppearance.AppCompat.Small"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            tools:text="Release date: 2016-05-01" />
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+            <TextView
+                android:id="@+id/text_details_release_date_title"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Release date: " />
+
+            <TextView
+                android:id="@+id/text_details_release_date"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2016-05-01" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/text_details_synopsis"
