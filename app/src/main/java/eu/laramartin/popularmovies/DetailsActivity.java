@@ -44,7 +44,9 @@ public class DetailsActivity extends AppCompatActivity {
                 .load(NetworkUtils.buildPosterUrl(movie.getPosterPath()))
                 .into(imagePoster);
         textDetailsTitle.setText(movie.getTitle());
-        textDetailsReleaseDate.setText(movie.getReleaseDate());
+        textDetailsReleaseDate.setText(
+                String.format(
+                        getResources().getString(R.string.release_date), movie.getReleaseDate()));
         textDetailsVoteAverage.setText(String.valueOf(movie.getVoteAverage()));
         textDetailsSynopsis.setText(movie.getOverview());
     }
