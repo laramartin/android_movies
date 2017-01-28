@@ -1,5 +1,6 @@
 package eu.laramartin.popularmovies;
 
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -36,11 +37,18 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         FetchMoviesTask moviesTask = new FetchMoviesTask();
         moviesTask.execute(FILTER_TYPE_1);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, getSpan());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         adapter = new MoviesAdapter();
         recyclerView.setAdapter(adapter);
+    }
+
+    private int getSpan() {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            return 4;
+        }
+        return 2;
     }
 
     public class FetchMoviesTask extends AsyncTask<String, Void, List<Movie>> {
