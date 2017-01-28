@@ -3,4 +3,5 @@
     <string name="filter_popular">Popular</string>
     <string name="filter_best">Best</string>
     <string name="release_date">Release date: %s</string>
+    <string name="vote_average">Vote average:</string>
 </resources>

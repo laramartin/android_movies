@@ -3,6 +3,7 @@ package eu.laramartin.popularmovies;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -23,11 +24,11 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.text_details_release_date)
     TextView textDetailsReleaseDate;
 
-    @BindView(R.id.text_details_vote_average)
-    TextView textDetailsVoteAverage;
-
     @BindView(R.id.text_details_synopsis)
     TextView textDetailsSynopsis;
+
+    @BindView(R.id.rating_bar)
+    RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
         textDetailsReleaseDate.setText(
                 String.format(
                         getResources().getString(R.string.release_date), movie.getReleaseDate()));
-        textDetailsVoteAverage.setText(String.valueOf(movie.getVoteAverage()));
         textDetailsSynopsis.setText(movie.getOverview());
+        ratingBar.setRating(movie.getVoteAverage());
     }
 }
