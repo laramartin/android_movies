@@ -19,7 +19,7 @@ import eu.laramartin.popularmovies.data.TrailerCollection;
 
 public class TrailersJsonUtils {
 
-    private static final String LOG_TAG = MoviesJsonUtils.class.getCanonicalName();
+    private static final String LOG_TAG = TrailersJsonUtils.class.getCanonicalName();
     private static final String statusError = "status_code";
     private static final String trailers = "results";
     private static final String key = "key";
@@ -32,7 +32,7 @@ public class TrailersJsonUtils {
         JSONObject responseJson = new JSONObject(json);
         if (responseJson.has(statusError)) {
             int errorCode = responseJson.getInt(statusError);
-            Log.e(LOG_TAG, "parse json error code: " + String.valueOf(errorCode));
+            Log.e(LOG_TAG, "parse json trailers error code: " + String.valueOf(errorCode));
         }
         JSONArray trailersArray = responseJson.getJSONArray(trailers);
         List<Trailer> trailerList = parseTrailerList(trailersArray);

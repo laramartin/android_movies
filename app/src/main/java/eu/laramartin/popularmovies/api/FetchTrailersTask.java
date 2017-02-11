@@ -27,7 +27,7 @@ public class FetchTrailersTask extends AsyncTask<String, Void, List<Trailer>> {
 
     @Override
     protected List<Trailer> doInBackground(String... params) {
-        URL trailersRequestUrl = NetworkUtils.buildTrailersUrl(BuildConfig.API_KEY, id);
+        URL trailersRequestUrl = NetworkUtils.buildTrailersOrReviewsUrl(BuildConfig.API_KEY, id, "videos");
         try {
             String jsonTrailersResponse = NetworkUtils
                     .getResponseFromHttpUrl(trailersRequestUrl);

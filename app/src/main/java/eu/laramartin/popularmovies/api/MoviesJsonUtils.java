@@ -33,7 +33,7 @@ public class MoviesJsonUtils {
         JSONObject responseJson = new JSONObject(json);
         if (responseJson.has(statusError)) {
             int errorCode = responseJson.getInt(statusError);
-            Log.e(LOG_TAG, "parse json error code: " + String.valueOf(errorCode));
+            Log.e(LOG_TAG, "parse json movies error code: " + String.valueOf(errorCode));
         }
         JSONArray moviesArray = responseJson.getJSONArray(movies);
         List<Movie> movieList = parseMovieList(moviesArray);

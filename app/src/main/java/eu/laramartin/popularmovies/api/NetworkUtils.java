@@ -60,14 +60,14 @@ public class NetworkUtils {
         return "http://image.tmdb.org/t/p/w500/" + posterPath;
     }
 
-    public static URL buildTrailersUrl(String apiKey, String id) {
+    public static URL buildTrailersOrReviewsUrl(String apiKey, String id, String trailerOrReview) {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("http")
                 .authority("api.themoviedb.org")
                 .appendPath("3")
                 .appendPath("movie")
                 .appendPath(id)
-                .appendPath("videos")
+                .appendPath(trailerOrReview)
                 .appendQueryParameter("api_key", apiKey);
         URL url = null;
         try {
