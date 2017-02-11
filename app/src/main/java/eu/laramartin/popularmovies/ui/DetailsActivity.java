@@ -2,11 +2,16 @@ package eu.laramartin.popularmovies.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,6 +20,7 @@ import eu.laramartin.popularmovies.api.FetchReviewsTask;
 import eu.laramartin.popularmovies.api.FetchTrailersTask;
 import eu.laramartin.popularmovies.api.NetworkUtils;
 import eu.laramartin.popularmovies.data.Movie;
+import eu.laramartin.popularmovies.data.Review;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -32,6 +38,9 @@ public class DetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.rating_bar)
     RatingBar ratingBar;
+
+    @BindView(R.id.details_linear_layout)
+    LinearLayout detailsLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +63,31 @@ public class DetailsActivity extends AppCompatActivity {
         textDetailsSynopsis.setText(movie.getOverview());
         ratingBar.setRating(movie.getVoteAverage());
         new FetchTrailersTask(String.valueOf(movie.getId())).execute();
-        new FetchReviewsTask(String.valueOf(movie.getId())).execute();
+        new FetchReviewsTask(String.valueOf(movie.getId())) {
+
+            @Override
+            protected void onPostExecute(List<Review> reviews) {
+                addReviewsToLayout(reviews);
+            }
+        }.execute();
+    }
+
+    private void addReviewsToLayout(List<Review> reviews) {
+        if (reviews != null) {
+            for (Review review: reviews) {
+                View view = getReviewView(review);
+                detailsLinearLayout.addView(view);
+            }
+        }
+    }
+
+    private View getReviewView(Review review) {
+        LayoutInflater inflater = LayoutInflater.from(DetailsActivity.this);
+        View view = inflater.inflate(R.layout.review_list_item, detailsLinearLayout, false);
+        TextView contentTextView = ButterKnife.findById(view, R.id.text_content_review);
+        TextView authorTextView = ButterKnife.findById(view, R.id.text_author_review);
+        authorTextView.setText(getString(R.string.by_author_review, review.getAuthor()));
+        contentTextView.setText(review.getContent());
+        return view;
     }
 }
