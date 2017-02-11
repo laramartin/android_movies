@@ -6,9 +6,9 @@ import java.net.URL;
 import java.util.List;
 
 import eu.laramartin.popularmovies.BuildConfig;
+import eu.laramartin.popularmovies.data.MovieCollection;
 import eu.laramartin.popularmovies.ui.MoviesAdapter;
 import eu.laramartin.popularmovies.data.Movie;
-import eu.laramartin.popularmovies.data.MoviesResponse;
 
 /**
  * Created by lara on 11.02.17.
@@ -27,8 +27,8 @@ public class FetchMoviesTask extends AsyncTask<String, Void, List<Movie>> {
         try {
             String jsonMoviesResponse = NetworkUtils
                     .getResponseFromHttpUrl(moviesRequestUrl);
-            MoviesResponse moviesResponse = MoviesJsonUtils.parseJson(jsonMoviesResponse);
-            return moviesResponse.getMovies();
+            MovieCollection movieCollection = MoviesJsonUtils.parseJson(jsonMoviesResponse);
+            return movieCollection.getMovies();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.laramartin.popularmovies.data.Movie;
-import eu.laramartin.popularmovies.data.MoviesResponse;
+import eu.laramartin.popularmovies.data.MovieCollection;
 
 /**
  * Created by lara on 24/1/17.
@@ -28,7 +28,7 @@ public class MoviesJsonUtils {
     private static final String idKey = "id";
     private static final String voteAverageKey = "vote_average";
 
-    public static MoviesResponse parseJson(String json)
+    public static MovieCollection parseJson(String json)
             throws JSONException {
         JSONObject responseJson = new JSONObject(json);
         if (responseJson.has(statusError)) {
@@ -37,9 +37,9 @@ public class MoviesJsonUtils {
         }
         JSONArray moviesArray = responseJson.getJSONArray(movies);
         List<Movie> movieList = parseMovieList(moviesArray);
-        MoviesResponse moviesResponse = new MoviesResponse();
-        moviesResponse.setMovies(movieList);
-        return moviesResponse;
+        MovieCollection movieCollection = new MovieCollection();
+        movieCollection.setMovies(movieList);
+        return movieCollection;
     }
 
     @NonNull

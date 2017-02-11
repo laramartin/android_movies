@@ -6,7 +6,7 @@ import java.util.List;
  * Created by lara on 24/1/17.
  */
 
-public class MoviesResponse {
+public class MovieCollection {
 
     List<Movie> movies;
 
@@ -20,7 +20,7 @@ public class MoviesResponse {
 
     @Override
     public String toString() {
-        return "MoviesResponse{" +
+        return "MovieCollection{" +
                 "movies=" + movies +
                 '}';
     }
