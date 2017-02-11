@@ -4,4 +4,6 @@
     <string name="filter_top_rated">Top Rated</string>
     <string name="release_date">Release date: %s</string>
     <string name="vote_average">Vote average:</string>
+    <string name="reviews_title">Reviews</string>
+    <string name="button_play_trailer">Play Trailer</string>
 </resources>
