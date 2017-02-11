@@ -55,6 +55,7 @@ public class DetailsActivity extends AppCompatActivity {
     private void setMovieDetails(Movie movie) {
         Picasso.with(imagePoster.getContext())
                 .load(NetworkUtils.buildPosterUrl(movie.getPosterPath()))
+                .placeholder(R.drawable.shape_movie_poster)
                 .into(imagePoster);
         textDetailsTitle.setText(movie.getTitle());
         textDetailsReleaseDate.setText(
