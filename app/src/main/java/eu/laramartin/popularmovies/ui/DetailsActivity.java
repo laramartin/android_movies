@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -23,6 +25,7 @@ import eu.laramartin.popularmovies.api.FetchTrailersTask;
 import eu.laramartin.popularmovies.api.NetworkUtils;
 import eu.laramartin.popularmovies.data.Movie;
 import eu.laramartin.popularmovies.data.Review;
+import eu.laramartin.popularmovies.data.Trailer;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -43,6 +46,9 @@ public class DetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.details_linear_layout)
     LinearLayout detailsLinearLayout;
+
+    @BindView(R.id.play_trailer_button)
+    Button playTrailerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +71,39 @@ public class DetailsActivity extends AppCompatActivity {
                         getResources().getString(R.string.release_date), movie.getReleaseDate()));
         textDetailsSynopsis.setText(movie.getOverview());
         ratingBar.setRating(movie.getVoteAverage());
-        new FetchTrailersTask(String.valueOf(movie.getId())).execute();
+        new FetchTrailersTask(String.valueOf(movie.getId())) {
+            @Override
+            protected void onPostExecute(List<Trailer> trailers) {
+                if (trailers != null) {
+                    for (Trailer trailer: trailers) {
+                        if (trailer.getType().equals("Trailer") &&
+                                trailer.getSite().equals("YouTube")) {
+                            setActionOnPlayTrailerButton(trailer);
+                        }
+                    }
+                }
+            }
+        }.execute();
         new FetchReviewsTask(String.valueOf(movie.getId())) {
-
             @Override
             protected void onPostExecute(List<Review> reviews) {
                 addReviewsToLayout(reviews);
             }
         }.execute();
+
+    }
+
+    private void setActionOnPlayTrailerButton(final Trailer trailer) {
+        playTrailerButton.setEnabled(true);
+        playTrailerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(NetworkUtils.buildYouTubeUrl(trailer.getKey())));
+                startActivity(intent);
+                Log.v("Details", "clicked play trailer button");
+            }
+        });
     }
 
     private void addReviewsToLayout(List<Review> reviews) {

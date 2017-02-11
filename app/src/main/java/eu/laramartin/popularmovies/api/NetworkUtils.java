@@ -76,4 +76,9 @@ public class NetworkUtils {
         Log.v(LOG_TAG, "Built trailers URI " + url);
         return url;
     }
+
+    public static String buildYouTubeUrl(String key) {
+        String baseUrl = "https://www.youtube.com/watch?v=";
+        return baseUrl + key;
+    }
 }

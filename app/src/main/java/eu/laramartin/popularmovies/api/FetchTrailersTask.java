@@ -1,7 +1,6 @@
 package eu.laramartin.popularmovies.api;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.net.URL;
 import java.util.List;
@@ -14,13 +13,12 @@ import eu.laramartin.popularmovies.data.TrailerCollection;
  * Created by lara on 11.02.17.
  */
 
-public class FetchTrailersTask extends AsyncTask<String, Void, List<Trailer>> {
+public abstract class FetchTrailersTask extends AsyncTask<String, Void, List<Trailer>> {
 
     private static final String LOG_TAG = FetchTrailersTask.class.getSimpleName();
     private String id;
 
     public FetchTrailersTask(String id) {
-//        this.adapter = adapter;
         this.id = id;
     }
 
@@ -35,17 +33,6 @@ public class FetchTrailersTask extends AsyncTask<String, Void, List<Trailer>> {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    @Override
-    protected void onPostExecute(List<Trailer> trailers) {
-        if (trailers != null) {
-            for (int i = 0; i < trailers.size(); i++) {
-                Log.v(LOG_TAG, "trailer name: " + trailers.get(i).getName() +
-                " \ntype: " + trailers.get(i).getType() +
-                " \nsite: " + trailers.get(i).getSite());
-            }
         }
     }
 }
