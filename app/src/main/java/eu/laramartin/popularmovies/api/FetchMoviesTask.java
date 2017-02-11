@@ -1,12 +1,12 @@
-package eu.laramartin.popularmovies;
+package eu.laramartin.popularmovies.api;
 
 import android.os.AsyncTask;
 
 import java.net.URL;
 import java.util.List;
 
-import eu.laramartin.popularmovies.api.MoviesJsonUtils;
-import eu.laramartin.popularmovies.api.NetworkUtils;
+import eu.laramartin.popularmovies.BuildConfig;
+import eu.laramartin.popularmovies.ui.MoviesAdapter;
 import eu.laramartin.popularmovies.data.Movie;
 import eu.laramartin.popularmovies.data.MoviesResponse;
 

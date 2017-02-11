@@ -1,4 +1,4 @@
-package eu.laramartin.popularmovies;
+package eu.laramartin.popularmovies.ui;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.laramartin.popularmovies.R;
+import eu.laramartin.popularmovies.api.FetchMoviesTask;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package eu.laramartin.popularmovies;
+package eu.laramartin.popularmovies.ui;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.laramartin.popularmovies.R;
 import eu.laramartin.popularmovies.api.NetworkUtils;
 import eu.laramartin.popularmovies.data.Movie;
 
