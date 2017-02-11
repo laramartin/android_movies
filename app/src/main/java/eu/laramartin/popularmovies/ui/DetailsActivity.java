@@ -1,5 +1,7 @@
 package eu.laramartin.popularmovies.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -82,13 +84,22 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
-    private View getReviewView(Review review) {
+    private View getReviewView(final Review review) {
         LayoutInflater inflater = LayoutInflater.from(DetailsActivity.this);
         View view = inflater.inflate(R.layout.review_list_item, detailsLinearLayout, false);
         TextView contentTextView = ButterKnife.findById(view, R.id.text_content_review);
         TextView authorTextView = ButterKnife.findById(view, R.id.text_author_review);
         authorTextView.setText(getString(R.string.by_author_review, review.getAuthor()));
         contentTextView.setText(review.getContent());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = review.getUrl();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }
