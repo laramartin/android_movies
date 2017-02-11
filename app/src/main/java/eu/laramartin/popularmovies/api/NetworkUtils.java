@@ -25,8 +25,6 @@ public class NetworkUtils {
                 .authority("api.themoviedb.org")
                 .appendPath("3")
                 .appendPath("movie")
-//                .appendPath("popular")
-                //TODO check how the api call for 2nd opt is
                 .appendPath(filterType)
                 .appendQueryParameter("api_key", apiKey);
         URL url = null;

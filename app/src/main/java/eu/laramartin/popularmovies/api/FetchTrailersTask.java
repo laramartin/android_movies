@@ -17,7 +17,6 @@ import eu.laramartin.popularmovies.data.TrailerCollection;
 public class FetchTrailersTask extends AsyncTask<String, Void, List<Trailer>> {
 
     private static final String LOG_TAG = FetchTrailersTask.class.getSimpleName();
-//    private MoviesAdapter adapter;
     private String id;
 
     public FetchTrailersTask(String id) {
@@ -42,8 +41,6 @@ public class FetchTrailersTask extends AsyncTask<String, Void, List<Trailer>> {
     @Override
     protected void onPostExecute(List<Trailer> trailers) {
         if (trailers != null) {
-//            Log.v(MainActivity.LOG_TAG, "moviesData: " + movies);
-//            adapter.setMoviesData(movies);
             for (int i = 0; i < trailers.size(); i++) {
                 Log.v(LOG_TAG, "trailer name: " + trailers.get(i).getName() +
                 " \ntype: " + trailers.get(i).getType() +

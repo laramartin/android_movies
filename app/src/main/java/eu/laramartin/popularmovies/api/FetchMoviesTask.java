@@ -38,7 +38,6 @@ public class FetchMoviesTask extends AsyncTask<String, Void, List<Movie>> {
     @Override
     protected void onPostExecute(List<Movie> movies) {
         if (movies != null) {
-//            Log.v(MainActivity.LOG_TAG, "moviesData: " + movies);
             adapter.setMoviesData(movies);
         }
     }
