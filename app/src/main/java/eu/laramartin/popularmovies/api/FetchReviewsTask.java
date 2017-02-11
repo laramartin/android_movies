@@ -35,5 +35,4 @@ public abstract class FetchReviewsTask extends AsyncTask<String, Void, List<Revi
             return null;
         }
     }
-
 }

@@ -75,7 +75,7 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(List<Trailer> trailers) {
                 if (trailers != null) {
-                    for (Trailer trailer: trailers) {
+                    for (Trailer trailer : trailers) {
                         if (trailer.getType().equals("Trailer") &&
                                 trailer.getSite().equals("YouTube")) {
                             setActionOnPlayTrailerButton(trailer);
@@ -108,7 +108,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void addReviewsToLayout(List<Review> reviews) {
         if (reviews != null) {
-            for (Review review: reviews) {
+            for (Review review : reviews) {
                 View view = getReviewView(review);
                 detailsLinearLayout.addView(view);
             }

@@ -12,10 +12,10 @@
     tools:context="eu.laramartin.popularmovies.ui.DetailsActivity">
 
     <LinearLayout
+        android:id="@+id/details_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/details_linear_layout">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,12 +28,12 @@
                 android:layout_height="wrap_content" />
 
             <Button
+                android:id="@+id/play_trailer_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/play_trailer_button"
                 android:enabled="false"
                 android:text="@string/button_play_trailer" />
 
@@ -47,9 +47,7 @@
                 android:src="@drawable/ic_favorite_border_black_24dp"
                 android:tint="@color/colorAccent" />
 
- 
         </RelativeLayout>
-
 
         <TextView
             android:id="@+id/text_details_title"
@@ -108,7 +106,6 @@
                 tools:text="2016-05-01" />
         </LinearLayout>
 
-
         <TextView
             android:id="@+id/text_details_synopsis"
             style="@style/TextAppearance.AppCompat.Body1"
@@ -128,10 +125,8 @@
             android:id="@+id/text_review_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
             android:text="@string/reviews_title" />
-
     </LinearLayout>
-
 </ScrollView>

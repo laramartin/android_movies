@@ -3,21 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp"
     android:layout_marginBottom="8dp"
+    android:background="@color/colorSoftGrey"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:background="@color/colorSoftGrey">
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/text_content_review"
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
-        android:maxLines="5"
         android:ellipsize="end"
+        android:maxLines="5"
+        android:textStyle="italic"
         tools:text="This movie is amazing! I recommend it!" />
 
     <TextView
@@ -25,9 +25,9 @@
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        tools:text="Dr. Google"
-        android:layout_below="@+id/text_content_review"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/text_content_review"
+        android:layout_gravity="right"
+        tools:text="Dr. Google" />
 </RelativeLayout>
