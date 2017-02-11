@@ -59,4 +59,23 @@ public class NetworkUtils {
     public static String buildPosterUrl(String posterPath) {
         return "http://image.tmdb.org/t/p/w500/" + posterPath;
     }
+
+    public static URL buildTrailersUrl(String apiKey, String id) {
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("http")
+                .authority("api.themoviedb.org")
+                .appendPath("3")
+                .appendPath("movie")
+                .appendPath(id)
+                .appendPath("videos")
+                .appendQueryParameter("api_key", apiKey);
+        URL url = null;
+        try {
+            url = new URL(builder.build().toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Log.v(LOG_TAG, "Built trailers URI " + url);
+        return url;
+    }
 }

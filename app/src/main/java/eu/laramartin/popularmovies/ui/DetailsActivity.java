@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.popularmovies.R;
+import eu.laramartin.popularmovies.api.FetchTrailersTask;
 import eu.laramartin.popularmovies.api.NetworkUtils;
 import eu.laramartin.popularmovies.data.Movie;
 
@@ -51,5 +52,6 @@ public class DetailsActivity extends AppCompatActivity {
                         getResources().getString(R.string.release_date), movie.getReleaseDate()));
         textDetailsSynopsis.setText(movie.getOverview());
         ratingBar.setRating(movie.getVoteAverage());
+        new FetchTrailersTask(String.valueOf(movie.getId())).execute();
     }
 }
