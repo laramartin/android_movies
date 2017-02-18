@@ -74,6 +74,9 @@ public class DetailsActivity extends AppCompatActivity {
         final Movie movie = data.getParcelable("movieDetails");
         setMovieDetails(movie);
         dbHelper = new MoviesDbHelper(this);
+        if (checkIfMovieIsInDb(movie)) {
+            changeToFilledFavIcon();
+        }
         imageFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
