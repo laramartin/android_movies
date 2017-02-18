@@ -74,19 +74,37 @@ public class MoviesContentProvider extends ContentProvider {
                 if (id > 0) {
                     returnUri = ContentUris.withAppendedId(MoviesContract.MoviesEntry.CONTENT_URI, id);
                 } else {
+                    db.close();
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 }
                 break;
             default:
+                db.close();
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
+        db.close();
         return returnUri;
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int match = uriMatcher.match(uri);
+        int rowDeleted = 0;
+        switch (match) {
+            case MOVIES:
+                rowDeleted = db.delete(MoviesContract.MoviesEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            default:
+                db.close();
+                throw new UnsupportedOperationException("Couldn't delete :(");
+        }
+        if (rowDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        db.close();
+        return rowDeleted;
     }
 
     @Override

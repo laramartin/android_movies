@@ -84,16 +84,23 @@ public class DetailsActivity extends AppCompatActivity {
                     Log.v(LOG_TAG, "movie is not in DB...");
                     // TODO fav icon changes to filled
                     changeToFilledFavIcon();
-                    // TODO save movie from DB
+                    // TODO save movie into DB
                     saveMovieInDb(movie);
                 } else{
                     Log.v(LOG_TAG, "movie is in DB!!!");
                     // TODO fav icon changes to empty
                     changeToEmptyFavIcon();
-                    // TODO delete movie into DB
+                    // TODO delete movie from DB
+                    deleteMovieFromDb(movie);
                 }
             }
         });
+    }
+
+    private void deleteMovieFromDb(Movie movie) {
+        String selection = MoviesContract.MoviesEntry.COLUMN_MOVIE_ID + "=?";
+        String[] selectionArgs = {String.valueOf(movie.getId())};
+        getContentResolver().delete(MoviesContract.MoviesEntry.CONTENT_URI, selection, selectionArgs);
     }
 
     private void saveMovieInDb(Movie movie) {
