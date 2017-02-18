@@ -25,6 +25,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
+        <provider
+            android:authorities="eu.laramartin.popularmovies"
+            android:name="eu.laramartin.popularmovies.data.MoviesContentProvider"
+            android:exported="false" />
     </application>
 
 </manifest>
