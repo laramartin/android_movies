@@ -44,8 +44,8 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.rating_bar)
     RatingBar ratingBar;
 
-    @BindView(R.id.details_linear_layout)
-    LinearLayout detailsLinearLayout;
+    @BindView(R.id.layout_review_list)
+    LinearLayout reviewsLinearLayout;
 
     @BindView(R.id.play_trailer_button)
     Button playTrailerButton;
@@ -110,14 +110,14 @@ public class DetailsActivity extends AppCompatActivity {
         if (reviews != null) {
             for (Review review : reviews) {
                 View view = getReviewView(review);
-                detailsLinearLayout.addView(view);
+                reviewsLinearLayout.addView(view);
             }
         }
     }
 
     private View getReviewView(final Review review) {
         LayoutInflater inflater = LayoutInflater.from(DetailsActivity.this);
-        View view = inflater.inflate(R.layout.review_list_item, detailsLinearLayout, false);
+        View view = inflater.inflate(R.layout.review_list_item, reviewsLinearLayout, false);
         TextView contentTextView = ButterKnife.findById(view, R.id.text_content_review);
         TextView authorTextView = ButterKnife.findById(view, R.id.text_author_review);
         authorTextView.setText(getString(R.string.by_author_review, review.getAuthor()));
