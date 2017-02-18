@@ -29,8 +29,8 @@
 
             <ImageView
                 android:id="@+id/favorite_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
@@ -97,11 +97,18 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/text_synopsis_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/synopsis_title" />
+
+        <TextView
             android:id="@+id/text_details_synopsis"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:textStyle="italic"
             tools:text="this is a synopsis bla bla bla bla. this is a synopsis bla bla bla bla. this is a synopsis bla bla bla bla. " />
 

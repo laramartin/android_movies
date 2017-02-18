@@ -9,4 +9,5 @@
     <string name="by_author_review">by %s</string>
     <string name="details_activity_name">Movie Details</string>
     <string name="trailer_title">Trailers</string>
+    <string name="synopsis_title">Synopsis</string>
 </resources>
