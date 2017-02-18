@@ -76,17 +76,16 @@ public class DetailsActivity extends AppCompatActivity {
         imageFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkIfMovieIsInDb(movie)) {
-                    Log.v(LOG_TAG, "movie is in DB!!!");
-                    // TODO fav icon changes to empty
-                    showEmptyFavIcon();
-                    // TODO delete movie into DB
-
-                } else{
+                if (!checkIfMovieIsInDb(movie)) {
                     Log.v(LOG_TAG, "movie is not in DB...");
                     // TODO fav icon changes to filled
-                     showFilledFavIcon();
+                    changeToFilledFavIcon();
                     // TODO save movie from DB
+                } else{
+                    Log.v(LOG_TAG, "movie is in DB!!!");
+                    // TODO fav icon changes to empty
+                    changeToEmptyFavIcon();
+                    // TODO delete movie into DB
                 }
             }
         });
@@ -96,11 +95,11 @@ public class DetailsActivity extends AppCompatActivity {
                 // TODO if movie is not in DB, fav icon should be empty and movie deleted from DB
     }
 
-    private void showEmptyFavIcon() {
+    private void changeToEmptyFavIcon() {
         imageFavorite.setImageResource(R.drawable.ic_favorite_border_black_24dp);
     }
 
-    private void showFilledFavIcon() {
+    private void changeToFilledFavIcon() {
         imageFavorite.setImageResource(R.drawable.ic_favorite_black_24dp);
     }
 
