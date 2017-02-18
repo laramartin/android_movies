@@ -122,7 +122,7 @@
             android:background="@color/colorPrimaryDark" />
 
         <TextView
-            android:id="@+id/text_review_title"
+            android:id="@+id/text_reviews_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -130,11 +130,23 @@
             android:text="@string/reviews_title" />
 
         <LinearLayout
-            android:id="@+id/layout_review_list"
+            android:id="@+id/layout_reviews_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/text_trailer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/trailer_title" />
+
+        <LinearLayout
+            android:id="@+id/layout_trailers_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
     </LinearLayout>
 </ScrollView>

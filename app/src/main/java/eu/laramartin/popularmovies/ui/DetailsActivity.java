@@ -44,11 +44,14 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.rating_bar)
     RatingBar ratingBar;
 
-    @BindView(R.id.layout_review_list)
-    LinearLayout reviewsLinearLayout;
+    @BindView(R.id.text_reviews_title)
+    TextView textReviewsTitle;
+
+    @BindView(R.id.layout_reviews_list)
+    LinearLayout linearLayoutReviews;
 
     @BindView(R.id.play_trailer_button)
-    Button playTrailerButton;
+    Button buttonPlayTrailer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +97,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void setActionOnPlayTrailerButton(final Trailer trailer) {
-        playTrailerButton.setEnabled(true);
-        playTrailerButton.setOnClickListener(new View.OnClickListener() {
+        buttonPlayTrailer.setEnabled(true);
+        buttonPlayTrailer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -110,14 +113,17 @@ public class DetailsActivity extends AppCompatActivity {
         if (reviews != null) {
             for (Review review : reviews) {
                 View view = getReviewView(review);
-                reviewsLinearLayout.addView(view);
+                linearLayoutReviews.addView(view);
             }
+        } else {
+            textReviewsTitle.setVisibility(View.INVISIBLE);
+            linearLayoutReviews.setVisibility(View.INVISIBLE);
         }
     }
 
     private View getReviewView(final Review review) {
         LayoutInflater inflater = LayoutInflater.from(DetailsActivity.this);
-        View view = inflater.inflate(R.layout.review_list_item, reviewsLinearLayout, false);
+        View view = inflater.inflate(R.layout.review_list_item, linearLayoutReviews, false);
         TextView contentTextView = ButterKnife.findById(view, R.id.text_content_review);
         TextView authorTextView = ButterKnife.findById(view, R.id.text_author_review);
         authorTextView.setText(getString(R.string.by_author_review, review.getAuthor()));
