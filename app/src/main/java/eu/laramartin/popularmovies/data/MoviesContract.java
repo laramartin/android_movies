@@ -1,5 +1,6 @@
 package eu.laramartin.popularmovies.data;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -11,7 +12,15 @@ public class MoviesContract {
     private MoviesContract() {
     }
 
+    public static final String AUTHORITY = "eu.laramartin.popularmovies";
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
+    public static final String PATH_MOVIES = "movies";
+
+
     public final class MoviesEntry implements BaseColumns {
+        public final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_MOVIES).build();
+
         public static final String TABLE_NAME = "movies";
         public static final String COLUMN_MOVIE_ID = "movieId";
         public static final String COLUMN_MOVIE_TITLE = "movieTitle";
