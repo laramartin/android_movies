@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -50,8 +49,11 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.layout_reviews_list)
     LinearLayout linearLayoutReviews;
 
-    @BindView(R.id.play_trailer_button)
-    Button buttonPlayTrailer;
+    @BindView(R.id.text_trailer_title)
+    TextView textTrailerTitle;
+
+    @BindView(R.id.layout_trailers_list)
+    LinearLayout linearLayoutTrailers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,14 +79,7 @@ public class DetailsActivity extends AppCompatActivity {
         new FetchTrailersTask(String.valueOf(movie.getId())) {
             @Override
             protected void onPostExecute(List<Trailer> trailers) {
-                if (trailers != null) {
-                    for (Trailer trailer : trailers) {
-                        if (trailer.getType().equals("Trailer") &&
-                                trailer.getSite().equals("YouTube")) {
-                            setActionOnPlayTrailerButton(trailer);
-                        }
-                    }
-                }
+                addTrailersToLayout(trailers);
             }
         }.execute();
         new FetchReviewsTask(String.valueOf(movie.getId())) {
@@ -96,29 +91,56 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
-    private void setActionOnPlayTrailerButton(final Trailer trailer) {
-        buttonPlayTrailer.setEnabled(true);
-        buttonPlayTrailer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(NetworkUtils.buildYouTubeUrl(trailer.getKey())));
-                startActivity(intent);
-                Log.v("Details", "clicked play trailer button");
+    private void addTrailersToLayout(List<Trailer> trailers) {
+        if (trailers != null && !trailers.isEmpty()) {
+            for (Trailer trailer : trailers) {
+                if (trailer.getType().equals("Trailer") &&
+                        trailer.getSite().equals("YouTube")) {
+                    View view = getTrailerView(trailer);
+                    linearLayoutTrailers.addView(view);
+                }
             }
-        });
+        } else {
+            hideTrailersSection();
+        }
     }
 
     private void addReviewsToLayout(List<Review> reviews) {
-        if (reviews != null) {
+        if (reviews != null && !reviews.isEmpty()) {
             for (Review review : reviews) {
                 View view = getReviewView(review);
                 linearLayoutReviews.addView(view);
             }
         } else {
-            textReviewsTitle.setVisibility(View.INVISIBLE);
-            linearLayoutReviews.setVisibility(View.INVISIBLE);
+            hideReviewsSection();
         }
+    }
+
+    private void hideTrailersSection() {
+        textTrailerTitle.setVisibility(View.GONE);
+        linearLayoutTrailers.setVisibility(View.GONE);
+    }
+
+    private void hideReviewsSection() {
+        textReviewsTitle.setVisibility(View.GONE);
+        linearLayoutReviews.setVisibility(View.GONE);
+    }
+
+    private View getTrailerView(final Trailer trailer) {
+        LayoutInflater inflater = LayoutInflater.from(DetailsActivity.this);
+        View view = inflater.inflate(R.layout.trailer_list_item, linearLayoutTrailers, false);
+        TextView trailerNameTextView = ButterKnife.findById(view, R.id.text_trailer_item_name);
+        trailerNameTextView.setText(trailer.getName());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(NetworkUtils.buildYouTubeUrl(trailer.getKey())));
+                startActivity(intent);
+                Log.v("Details", "clicked play trailer: " + trailer.getName());
+            }
+        });
+        return view;
     }
 
     private View getReviewView(final Review review) {

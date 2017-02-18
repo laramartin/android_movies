@@ -27,16 +27,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/play_trailer_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:enabled="false"
-                android:text="@string/button_play_trailer" />
-
             <ImageView
                 android:id="@+id/favorite_image"
                 android:layout_width="wrap_content"
@@ -122,6 +112,20 @@
             android:background="@color/colorPrimaryDark" />
 
         <TextView
+            android:id="@+id/text_trailer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/trailer_title" />
+
+        <LinearLayout
+            android:id="@+id/layout_trailers_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
             android:id="@+id/text_reviews_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,18 +139,5 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
 
-        <TextView
-            android:id="@+id/text_trailer_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/trailer_title" />
-
-        <LinearLayout
-            android:id="@+id/layout_trailers_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
     </LinearLayout>
 </ScrollView>
