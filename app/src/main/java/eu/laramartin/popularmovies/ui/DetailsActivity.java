@@ -78,15 +78,15 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (checkIfMovieIsInDb(movie)) {
                     Log.v(LOG_TAG, "movie is in DB!!!");
-                    // TODO fav icon should be filled
-                    showFilledFavIcon();
-                    // TODO save movie into DB
+                    // TODO fav icon changes to empty
+                    showEmptyFavIcon();
+                    // TODO delete movie into DB
 
                 } else{
                     Log.v(LOG_TAG, "movie is not in DB...");
-                    // TODO fav icon should be empty
-                    showEmptyFavIcon();
-                    // TODO delete movie from DB
+                    // TODO fav icon changes to filled
+                     showFilledFavIcon();
+                    // TODO save movie from DB
                 }
             }
         });
