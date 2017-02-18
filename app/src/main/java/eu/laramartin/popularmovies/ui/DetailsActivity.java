@@ -1,5 +1,6 @@
 package eu.laramartin.popularmovies.ui;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -81,6 +82,7 @@ public class DetailsActivity extends AppCompatActivity {
                     // TODO fav icon changes to filled
                     changeToFilledFavIcon();
                     // TODO save movie from DB
+                    saveMovieInDb(movie);
                 } else{
                     Log.v(LOG_TAG, "movie is in DB!!!");
                     // TODO fav icon changes to empty
@@ -89,10 +91,17 @@ public class DetailsActivity extends AppCompatActivity {
                 }
             }
         });
-        // TODO set on click listener on fav icon
-            // TODO check if movie is stored in DB
-                // TODO if movie is in DB, fav icon should be filled and movie saved to DB
-                // TODO if movie is not in DB, fav icon should be empty and movie deleted from DB
+    }
+
+    private void saveMovieInDb(Movie movie) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MoviesContract.MoviesEntry.COLUMN_MOVIE_ID, movie.getId());
+        contentValues.put(MoviesContract.MoviesEntry.COLUMN_MOVIE_TITLE, movie.getTitle());
+        contentValues.put(MoviesContract.MoviesEntry.COLUMN_MOVIE_DESCRIPTION, movie.getOverview());
+        contentValues.put(MoviesContract.MoviesEntry.COLUMN_MOVIE_POSTER_PATH, movie.getPosterPath());
+        contentValues.put(MoviesContract.MoviesEntry.COLUMN_MOVIE_RELEASE_DATE, movie.getReleaseDate());
+        contentValues.put(MoviesContract.MoviesEntry.COLUMN_MOVIE_VOTE_AVERAGE, movie.getVoteAverage());
+        getContentResolver().insert(MoviesContract.MoviesEntry.CONTENT_URI, contentValues);
     }
 
     private void changeToEmptyFavIcon() {
@@ -104,7 +113,6 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private boolean checkIfMovieIsInDb(Movie movie) {
-// TODO
         Cursor cursor = getContentResolver().query(MoviesContract.MoviesEntry.CONTENT_URI, null, null, null, null);
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -114,6 +122,9 @@ public class DetailsActivity extends AppCompatActivity {
                     return true;
                 }
             }
+        }
+        if (cursor != null) {
+            cursor.close();
         }
         return false;
     }

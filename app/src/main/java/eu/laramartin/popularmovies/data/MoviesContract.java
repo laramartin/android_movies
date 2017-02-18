@@ -37,7 +37,7 @@ public class MoviesContract {
                 MoviesEntry.COLUMN_MOVIE_DESCRIPTION + " TEXT NOT NULL," +
                 MoviesEntry.COLUMN_MOVIE_POSTER_PATH + " TEXT NOT NULL," +
                 MoviesEntry.COLUMN_MOVIE_RELEASE_DATE + " TEXT NOT NULL," +
-                MoviesEntry.COLUMN_MOVIE_VOTE_AVERAGE + " LONG NOT NULL," +
+                MoviesEntry.COLUMN_MOVIE_VOTE_AVERAGE + " LONG NOT NULL" +
                 ");";
     }
 }
