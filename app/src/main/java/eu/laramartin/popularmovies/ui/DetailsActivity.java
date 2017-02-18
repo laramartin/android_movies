@@ -1,6 +1,7 @@
 package eu.laramartin.popularmovies.ui;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,11 +24,14 @@ import eu.laramartin.popularmovies.api.FetchReviewsTask;
 import eu.laramartin.popularmovies.api.FetchTrailersTask;
 import eu.laramartin.popularmovies.api.NetworkUtils;
 import eu.laramartin.popularmovies.data.Movie;
+import eu.laramartin.popularmovies.data.MoviesContract;
+import eu.laramartin.popularmovies.data.MoviesDbHelper;
 import eu.laramartin.popularmovies.data.Review;
 import eu.laramartin.popularmovies.data.Trailer;
 
 public class DetailsActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = DetailsActivity.class.getSimpleName();
     @BindView(R.id.image_details_poster)
     ImageView imagePoster;
 
@@ -55,14 +59,64 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.layout_trailers_list)
     LinearLayout linearLayoutTrailers;
 
+    @BindView(R.id.favorite_image)
+    ImageView imageFavorite;
+
+    private MoviesDbHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
         Bundle data = getIntent().getExtras();
-        Movie movie = data.getParcelable("movieDetails");
+        final Movie movie = data.getParcelable("movieDetails");
         setMovieDetails(movie);
+        dbHelper = new MoviesDbHelper(this);
+        imageFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkIfMovieIsInDb(movie)) {
+                    Log.v(LOG_TAG, "movie is in DB!!!");
+                    // TODO fav icon should be filled
+                    showFilledFavIcon();
+                    // TODO save movie into DB
+
+                } else{
+                    Log.v(LOG_TAG, "movie is not in DB...");
+                    // TODO fav icon should be empty
+                    showEmptyFavIcon();
+                    // TODO delete movie from DB
+                }
+            }
+        });
+        // TODO set on click listener on fav icon
+            // TODO check if movie is stored in DB
+                // TODO if movie is in DB, fav icon should be filled and movie saved to DB
+                // TODO if movie is not in DB, fav icon should be empty and movie deleted from DB
+    }
+
+    private void showEmptyFavIcon() {
+        imageFavorite.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+    }
+
+    private void showFilledFavIcon() {
+        imageFavorite.setImageResource(R.drawable.ic_favorite_black_24dp);
+    }
+
+    private boolean checkIfMovieIsInDb(Movie movie) {
+// TODO
+        Cursor cursor = getContentResolver().query(MoviesContract.MoviesEntry.CONTENT_URI, null, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int movieId = cursor.getInt(
+                        cursor.getColumnIndex(MoviesContract.MoviesEntry.COLUMN_MOVIE_ID));
+                if (movieId == movie.getId()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void setMovieDetails(Movie movie) {
