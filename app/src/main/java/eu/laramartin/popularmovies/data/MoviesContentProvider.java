@@ -15,8 +15,8 @@ public class MoviesContentProvider extends ContentProvider {
 
     public final static int MOVIES = 100;
     public final static int MOVIE_WITH_ID = 101;
-
     public final static UriMatcher uriMatcher = buildUriMatcher();
+    private MoviesDbHelper dbHelper;
 
     public static UriMatcher buildUriMatcher() {
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -27,7 +27,8 @@ public class MoviesContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        return false;
+        dbHelper = new MoviesDbHelper(getContext());
+        return true;
     }
 
     @Nullable
