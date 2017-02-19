@@ -20,7 +20,8 @@
         <activity
             android:name=".ui.DetailsActivity"
             android:label="@string/details_activity_name"
-            android:parentActivityName=".ui.MainActivity">
+            android:parentActivityName=".ui.MainActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
