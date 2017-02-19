@@ -55,25 +55,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_popular) {
-            moviesAdapter = new MoviesAdapter();
-            FetchMoviesTask moviesTask = new FetchMoviesTask(moviesAdapter);
-            recyclerView.setAdapter(moviesAdapter);
-            moviesTask.execute(FILTER_TYPE_1);
+            setMovieAdapterPopular();
         }
         if (item.getItemId() == R.id.action_top_rated) {
-            moviesAdapter = new MoviesAdapter();
-            FetchMoviesTask moviesTask = new FetchMoviesTask(moviesAdapter);
-            recyclerView.setAdapter(moviesAdapter);
-            moviesTask.execute(FILTER_TYPE_2);
+            setMovieAdapterTopRated();
         }
         if (item.getItemId() == R.id.action_favorites) {
-            // TODO create new FavoritesAdapter
-            FavoritesAdapter favoritesAdapter = new FavoritesAdapter();
-            recyclerView.setAdapter(favoritesAdapter);
-            // TODO call CursorLoader
-            getSupportLoaderManager().initLoader(
-                    ID_FAVORITES_LOADER, null, new FavoritesCursorLoader(this, favoritesAdapter));
+            setMovieAdapterFavorites();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setMovieAdapterFavorites() {
+        FavoritesAdapter favoritesAdapter = new FavoritesAdapter();
+        recyclerView.setAdapter(favoritesAdapter);
+        getSupportLoaderManager().initLoader(
+                ID_FAVORITES_LOADER, null, new FavoritesCursorLoader(this, favoritesAdapter));
+    }
+
+    private void setMovieAdapterTopRated() {
+        moviesAdapter = new MoviesAdapter();
+        FetchMoviesTask moviesTask = new FetchMoviesTask(moviesAdapter);
+        recyclerView.setAdapter(moviesAdapter);
+        moviesTask.execute(FILTER_TYPE_2);
+    }
+
+    private void setMovieAdapterPopular() {
+        moviesAdapter = new MoviesAdapter();
+        FetchMoviesTask moviesTask = new FetchMoviesTask(moviesAdapter);
+        recyclerView.setAdapter(moviesAdapter);
+        moviesTask.execute(FILTER_TYPE_1);
     }
 }
