@@ -17,7 +17,7 @@ import eu.laramartin.popularmovies.data.FavoritesCursorLoader;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getCanonicalName();
-    private MoviesAdapter adapter;
+    private MoviesAdapter moviesAdapter;
     private static final String FILTER_TYPE_1 = "popular";
     private static final String FILTER_TYPE_2 = "top_rated";
     public static final int ID_FAVORITES_LOADER = 11;
@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, getSpan());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new MoviesAdapter();
-        FetchMoviesTask moviesTask = new FetchMoviesTask(adapter);
+        moviesAdapter = new MoviesAdapter();
+        FetchMoviesTask moviesTask = new FetchMoviesTask(moviesAdapter);
         moviesTask.execute(FILTER_TYPE_1);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(moviesAdapter);
     }
 
     private int getSpan() {
@@ -55,11 +55,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_popular) {
-            FetchMoviesTask moviesTask = new FetchMoviesTask(adapter);
+            moviesAdapter = new MoviesAdapter();
+            FetchMoviesTask moviesTask = new FetchMoviesTask(moviesAdapter);
+            recyclerView.setAdapter(moviesAdapter);
             moviesTask.execute(FILTER_TYPE_1);
         }
         if (item.getItemId() == R.id.action_top_rated) {
-            FetchMoviesTask moviesTask = new FetchMoviesTask(adapter);
+            moviesAdapter = new MoviesAdapter();
+            FetchMoviesTask moviesTask = new FetchMoviesTask(moviesAdapter);
+            recyclerView.setAdapter(moviesAdapter);
             moviesTask.execute(FILTER_TYPE_2);
         }
         if (item.getItemId() == R.id.action_favorites) {
