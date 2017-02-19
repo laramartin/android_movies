@@ -12,6 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.popularmovies.R;
 import eu.laramartin.popularmovies.api.FetchMoviesTask;
+import eu.laramartin.popularmovies.data.FavoritesCursorLoader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private MoviesAdapter adapter;
     private static final String FILTER_TYPE_1 = "popular";
     private static final String FILTER_TYPE_2 = "top_rated";
+    public static final int ID_FAVORITES_LOADER = 11;
 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
@@ -59,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_top_rated) {
             FetchMoviesTask moviesTask = new FetchMoviesTask(adapter);
             moviesTask.execute(FILTER_TYPE_2);
+        }
+        if (item.getItemId() == R.id.action_favorites) {
+            // TODO create new FavoritesAdapter
+            FavoritesAdapter favoritesAdapter = new FavoritesAdapter();
+            recyclerView.setAdapter(favoritesAdapter);
+            // TODO call CursorLoader
+            getSupportLoaderManager().initLoader(
+                    ID_FAVORITES_LOADER, null, new FavoritesCursorLoader(this, favoritesAdapter));
         }
         return super.onOptionsItemSelected(item);
     }
