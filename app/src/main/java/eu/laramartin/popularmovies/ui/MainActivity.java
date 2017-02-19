@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getCanonicalName();
     private MoviesAdapter moviesAdapter;
+    private int selectedOption = R.id.action_popular;
     private static final String FILTER_TYPE_1 = "popular";
     private static final String FILTER_TYPE_2 = "top_rated";
     public static final int ID_FAVORITES_LOADER = 11;
@@ -33,10 +34,17 @@ public class MainActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, getSpan());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        moviesAdapter = new MoviesAdapter();
-        FetchMoviesTask moviesTask = new FetchMoviesTask(moviesAdapter);
-        moviesTask.execute(FILTER_TYPE_1);
-        recyclerView.setAdapter(moviesAdapter);
+        if (savedInstanceState == null) {
+            setMovieAdapterPopular();
+        } else {
+            loadAdapterPerOptionSelected(savedInstanceState.getInt("optionSelected", R.id.action_popular));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("optionSelected", selectedOption);
     }
 
     private int getSpan() {
@@ -54,16 +62,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_popular) {
+        loadAdapterPerOptionSelected(item.getItemId());
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void loadAdapterPerOptionSelected(int selectedOption) {
+        this.selectedOption = selectedOption;
+        if (selectedOption == R.id.action_popular) {
             setMovieAdapterPopular();
         }
-        if (item.getItemId() == R.id.action_top_rated) {
+        if (selectedOption == R.id.action_top_rated) {
             setMovieAdapterTopRated();
         }
-        if (item.getItemId() == R.id.action_favorites) {
+        if (selectedOption == R.id.action_favorites) {
             setMovieAdapterFavorites();
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setMovieAdapterFavorites() {
