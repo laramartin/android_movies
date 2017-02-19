@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             setMovieAdapterPopular();
         } else {
-            loadAdapterPerOptionSelected(savedInstanceState.getInt("optionSelected", R.id.action_popular));
+            loadAdapterPerOptionSelected(
+                    savedInstanceState.getInt("optionSelected", R.id.action_popular));
         }
     }
 

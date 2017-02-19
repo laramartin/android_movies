@@ -17,10 +17,8 @@ import static eu.laramartin.popularmovies.ui.MainActivity.ID_FAVORITES_LOADER;
 
 public class FavoritesCursorLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
-
     private Context context;
     private FavoritesAdapter favoritesAdapter;
-
 
     public FavoritesCursorLoader(Context context, FavoritesAdapter favoritesAdapter) {
         this.context = context;
@@ -52,12 +50,11 @@ public class FavoritesCursorLoader implements LoaderManager.LoaderCallbacks<Curs
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        // TODO
         favoritesAdapter.swapCursor(cursor);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        favoritesAdapter.swapCursor(null);
     }
 }

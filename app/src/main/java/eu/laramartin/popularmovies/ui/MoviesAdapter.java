@@ -34,9 +34,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesAdap
         notifyDataSetChanged();
     }
 
-    public class MoviesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MoviesAdapterViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
 
-        @BindView(R.id.image_poster) ImageView imagePoster;
+        @BindView(R.id.image_poster)
+        ImageView imagePoster;
 
         public MoviesAdapterViewHolder(View itemView) {
             super(itemView);

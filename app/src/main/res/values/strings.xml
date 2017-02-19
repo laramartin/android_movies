@@ -11,4 +11,6 @@
     <string name="trailer_title">Trailers</string>
     <string name="synopsis_title">Synopsis</string>
     <string name="filter_favorites">Favorites</string>
+    <string name="trailer_type">Trailer</string>
+    <string name="trailer_site_youtube">YouTube</string>
 </resources>

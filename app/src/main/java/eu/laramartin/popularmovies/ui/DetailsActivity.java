@@ -81,16 +81,10 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!checkIfMovieIsInDb(movie)) {
-                    Log.v(LOG_TAG, "movie is not in DB...");
-                    // TODO fav icon changes to filled
                     changeToFilledFavIcon();
-                    // TODO save movie into DB
                     saveMovieInDb(movie);
-                } else{
-                    Log.v(LOG_TAG, "movie is in DB!!!");
-                    // TODO fav icon changes to empty
+                } else {
                     changeToEmptyFavIcon();
-                    // TODO delete movie from DB
                     deleteMovieFromDb(movie);
                 }
             }
@@ -123,7 +117,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private boolean checkIfMovieIsInDb(Movie movie) {
-        Cursor cursor = getContentResolver().query(MoviesContract.MoviesEntry.CONTENT_URI, null, null, null, null);
+        Cursor cursor = getContentResolver().query(
+                MoviesContract.MoviesEntry.CONTENT_URI, null, null, null, null);
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 int movieId = cursor.getInt(
@@ -168,8 +163,8 @@ public class DetailsActivity extends AppCompatActivity {
     private void addTrailersToLayout(List<Trailer> trailers) {
         if (trailers != null && !trailers.isEmpty()) {
             for (Trailer trailer : trailers) {
-                if (trailer.getType().equals("Trailer") &&
-                        trailer.getSite().equals("YouTube")) {
+                if (trailer.getType().equals(getString(R.string.trailer_type)) &&
+                        trailer.getSite().equals(getString(R.string.trailer_site_youtube))) {
                     View view = getTrailerView(trailer);
                     linearLayoutTrailers.addView(view);
                 }
@@ -211,7 +206,6 @@ public class DetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(NetworkUtils.buildYouTubeUrl(trailer.getKey())));
                 startActivity(intent);
-                Log.v("Details", "clicked play trailer: " + trailer.getName());
             }
         });
         return view;

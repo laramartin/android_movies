@@ -1,7 +1,6 @@
 package eu.laramartin.popularmovies.api;
 
 import android.net.Uri;
-import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +15,6 @@ import java.util.Scanner;
 
 public class NetworkUtils {
 
-    // http://api.themoviedb.org/3/movie/popular?api_key=[YOUR_API_KEY]
     private static final String LOG_TAG = NetworkUtils.class.getCanonicalName();
 
     public static URL buildUrl(String apiKey, String filterType) {
@@ -33,7 +31,6 @@ public class NetworkUtils {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        Log.v(LOG_TAG, "Built URI " + url);
         return url;
     }
 
@@ -73,7 +70,6 @@ public class NetworkUtils {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        Log.v(LOG_TAG, "Built trailers URI " + url);
         return url;
     }
 

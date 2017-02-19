@@ -28,8 +28,6 @@ public class Review {
         this.content = content;
     }
 
-
-
     public String getUrl() {
         return url;
     }
